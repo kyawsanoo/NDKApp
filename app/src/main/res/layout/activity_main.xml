@@ -56,4 +56,14 @@
         app:layout_constraintStart_toStartOf="@+id/sample_text_4"
         app:layout_constraintTop_toBottomOf="@+id/sample_text_4" />
 
+    <TextView
+        android:id="@+id/sample_text_6"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/sample_text_5"
+        app:layout_constraintStart_toStartOf="@+id/sample_text_5"
+        app:layout_constraintTop_toBottomOf="@+id/sample_text_5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

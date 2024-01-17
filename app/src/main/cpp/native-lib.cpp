@@ -72,3 +72,31 @@ Java_kso_android_ndkapp_MainActivity_addSavedArray(JNIEnv *env, jobject thiz) {
     env->DeleteGlobalRef(gl_arr);
     return res;
 }
+extern "C"
+JNIEXPORT void JNICALL
+Java_kso_android_ndkapp_MainActivity_modifyStaticVariable(JNIEnv *env, jobject thiz) {
+
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_kso_android_ndkapp_Test_greetingFromJNI(JNIEnv *env, jobject thiz) {
+    std::string name = "Kyaw San Oo";
+    return env->NewStringUTF(name.c_str());
+}
+
+
+extern "C"
+JNIEXPORT jobject JNICALL
+Java_kso_android_ndkapp_MainActivity_getEmployeeFromJNI(JNIEnv *env, jobject thiz) {
+    std::string name = "Kyaw San Oo";
+
+    jclass employee_class = env->FindClass( "kso/android/ndkapp/Employee");
+    jmethodID employee_constructor = env->GetMethodID( employee_class,  "<init>", "()V" );
+    jobject bank_obj = env->NewObject( employee_class, employee_constructor );
+
+    jmethodID set_name_method = env->GetMethodID( employee_class,  "setName", "(Ljava/lang/String;)V" );
+    jstring jstr = env->NewStringUTF( name.c_str() );
+    env->CallVoidMethod( bank_obj, set_name_method, jstr );
+    return bank_obj;
+}
