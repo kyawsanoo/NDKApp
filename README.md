@@ -1,3 +1,4 @@
 # NDKApp
 
-JNI call samples in Android with Native C++.
+JNI call samples in Android Kotlin with Native C++.
+
