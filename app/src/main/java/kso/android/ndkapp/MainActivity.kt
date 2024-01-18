@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
 
     external fun getEmployeeFromJNI(): Employee?
 
-    private external fun modifyStaticVariable()
     companion object {
         // Used to load the 'ndkapp' library on application startup.
         init {
