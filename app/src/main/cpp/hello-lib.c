@@ -4,7 +4,7 @@
 #include <jni.h>
 
 JNIEXPORT jstring JNICALL
-Java_kso_android_ndktestapp_MainActivity_greetingFromJNI(JNIEnv *env, jobject thiz) {
+Java_kso_android_ndktestapp_MainActivity_getABI(JNIEnv *env, jobject thiz) {
 
 #if defined(__arm__)
 #if defined(__ARM_ARCH_7A__)
@@ -40,5 +40,5 @@ Java_kso_android_ndktestapp_MainActivity_greetingFromJNI(JNIEnv *env, jobject th
 #define ABI "unknown"
 #endif
 
-    return (*env)->NewStringUTF(env, "Hello from JNI Compiled with ABI " ABI ".");
+    return (*env)->NewStringUTF(env, "Compiled with ABI " ABI ".");
 }

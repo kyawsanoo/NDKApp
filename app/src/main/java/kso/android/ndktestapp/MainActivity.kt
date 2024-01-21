@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         // Example of calls to a native method
         val test = Test()
-        binding.sampleText1.text = greetingFromJNI()/*.plus(", ").plus(test.greetingFromJNI())*/
+        binding.sampleText1.text = getABI().plus("\n ").plus(test.greetingFromJNI())
 
         binding.sampleText2.text = "1+2= ${add(1, 2)}"
 
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
      * which is packaged with this application.
      */
 
-    private external fun greetingFromJNI(): String
+    private external fun getABI(): String
 
     private external fun add(a: Int, b: Int): Int
 
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         // Used to load the 'ndkapp' library on application startup.
         init {
-            System.loadLibrary("ndk-test-lib")
+            System.loadLibrary("ndkapp")
         }
     }
 }

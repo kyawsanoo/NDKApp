@@ -95,7 +95,7 @@ Java_kso_android_ndktestapp_MainActivity_addSavedArray(JNIEnv *env, jobject thiz
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_kso_android_ndktestapp_Test_greetingFromJNI(JNIEnv *env, jobject thiz) {
-    std::string name = "Kyaw San Oo";
+    std::string name = "Hello From Jni.";
     return env->NewStringUTF(name.c_str());
 }
 
