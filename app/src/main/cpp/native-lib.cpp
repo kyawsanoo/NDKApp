@@ -1,5 +1,15 @@
 #include <jni.h>
 #include <string>
+#include <android/log.h>
+
+// Android log function wrappers
+static const char *kTAG = "native-lib";
+#define LOGI(...) \
+  ((void)__android_log_print(ANDROID_LOG_INFO, kTAG, __VA_ARGS__))
+#define LOGW(...) \
+  ((void)__android_log_print(ANDROID_LOG_WARN, kTAG, __VA_ARGS__))
+#define LOGE(...) \
+  ((void)__android_log_print(ANDROID_LOG_ERROR, kTAG, __VA_ARGS__))
 
 extern "C" JNIEXPORT jstring JNICALL
 Java_kso_android_ndkapp_MainActivity_greetingFromJNI(
@@ -9,10 +19,15 @@ Java_kso_android_ndkapp_MainActivity_greetingFromJNI(
     return env->NewStringUTF(hello.c_str());
 }
 
+
 extern "C"
 JNIEXPORT jint JNICALL
 Java_kso_android_ndkapp_MainActivity_add(JNIEnv *env, jobject thiz, jint a, jint b) {
-    return a + b;
+    jint sum = a + b;
+    LOGI("add() sum - %d", sum);
+    LOGW("add() sum - %d", sum);
+    LOGE("add() sum - %d", sum);
+    return sum;
 }
 
 extern "C"
@@ -21,7 +36,9 @@ Java_kso_android_ndkapp_MainActivity_getStrLen(JNIEnv *env, jobject thiz, jstrin
     const char *s = env->GetStringUTFChars(s_, 0);
 
     jint len = strlen(s);
-
+    LOGI("getStrLen() len - %d", len);
+    LOGW("getStrLen() len - %d", len);
+    LOGE("getStrLen() len - %d", len);
     env->ReleaseStringUTFChars(s_, s);
     return len;
 
@@ -95,3 +112,4 @@ Java_kso_android_ndkapp_MainActivity_getEmployeeFromJNI(JNIEnv *env, jobject thi
     env->CallVoidMethod(employee_object, set_name_method, jstr );
     return employee_object;
 }
+
