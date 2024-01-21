@@ -11,18 +11,20 @@ static const char *kTAG = "native-lib";
 #define LOGE(...) \
   ((void)__android_log_print(ANDROID_LOG_ERROR, kTAG, __VA_ARGS__))
 
+/*
 extern "C" JNIEXPORT jstring JNICALL
-Java_kso_android_ndkapp_MainActivity_greetingFromJNI(
+Java_kso_android_ndktestapp_MainActivity_greetingFromJNI(
         JNIEnv* env,
         jobject) {
     std::string hello = "Hello World from C++";
     return env->NewStringUTF(hello.c_str());
 }
+*/
 
 
 extern "C"
 JNIEXPORT jint JNICALL
-Java_kso_android_ndkapp_MainActivity_add(JNIEnv *env, jobject thiz, jint a, jint b) {
+Java_kso_android_ndktestapp_MainActivity_add(JNIEnv *env, jobject thiz, jint a, jint b) {
     jint sum = a + b;
     LOGI("add() sum - %d", sum);
     LOGW("add() sum - %d", sum);
@@ -32,7 +34,7 @@ Java_kso_android_ndkapp_MainActivity_add(JNIEnv *env, jobject thiz, jint a, jint
 
 extern "C"
 JNIEXPORT jint JNICALL
-Java_kso_android_ndkapp_MainActivity_getStrLen(JNIEnv *env, jobject thiz, jstring s_) {
+Java_kso_android_ndktestapp_MainActivity_getStrLen(JNIEnv *env, jobject thiz, jstring s_) {
     const char *s = env->GetStringUTFChars(s_, 0);
 
     jint len = strlen(s);
@@ -46,7 +48,7 @@ Java_kso_android_ndkapp_MainActivity_getStrLen(JNIEnv *env, jobject thiz, jstrin
 
 extern "C"
 JNIEXPORT jint JNICALL
-Java_kso_android_ndkapp_MainActivity_addArray(JNIEnv *env, jobject thiz, jintArray jarr) {
+Java_kso_android_ndktestapp_MainActivity_addArray(JNIEnv *env, jobject thiz, jintArray jarr) {
     jint *arr = env->GetIntArrayElements(jarr, NULL);
     int res=0;
     int size = env->GetArrayLength(jarr);
@@ -60,7 +62,7 @@ Java_kso_android_ndkapp_MainActivity_addArray(JNIEnv *env, jobject thiz, jintArr
 
 extern "C"
 JNIEXPORT jintArray JNICALL
-Java_kso_android_ndkapp_MainActivity_getArray(JNIEnv *env, jobject thiz) {
+Java_kso_android_ndktestapp_MainActivity_getArray(JNIEnv *env, jobject thiz) {
     int arr[10]={1,2,3,4,5,6,7,8,9,0};
     jintArray ret = env->NewIntArray(10);
 
@@ -72,13 +74,13 @@ Java_kso_android_ndkapp_MainActivity_getArray(JNIEnv *env, jobject thiz) {
 jintArray gl_arr;
 extern "C"
 JNIEXPORT void JNICALL
-Java_kso_android_ndkapp_MainActivity_saveArray(JNIEnv *env, jobject thiz, jintArray arr) {
+Java_kso_android_ndktestapp_MainActivity_saveArray(JNIEnv *env, jobject thiz, jintArray arr) {
     gl_arr = (jintArray )env->NewGlobalRef((jobject) arr);
 }
 
 extern "C"
 JNIEXPORT jint JNICALL
-Java_kso_android_ndkapp_MainActivity_addSavedArray(JNIEnv *env, jobject thiz) {
+Java_kso_android_ndktestapp_MainActivity_addSavedArray(JNIEnv *env, jobject thiz) {
     jint *arr = env->GetIntArrayElements(gl_arr, NULL);
     int res=0;
     int size = env->GetArrayLength(gl_arr);
@@ -92,7 +94,7 @@ Java_kso_android_ndkapp_MainActivity_addSavedArray(JNIEnv *env, jobject thiz) {
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_kso_android_ndkapp_Test_greetingFromJNI(JNIEnv *env, jobject thiz) {
+Java_kso_android_ndktestapp_Test_greetingFromJNI(JNIEnv *env, jobject thiz) {
     std::string name = "Kyaw San Oo";
     return env->NewStringUTF(name.c_str());
 }
@@ -100,10 +102,10 @@ Java_kso_android_ndkapp_Test_greetingFromJNI(JNIEnv *env, jobject thiz) {
 
 extern "C"
 JNIEXPORT jobject JNICALL
-Java_kso_android_ndkapp_MainActivity_getEmployeeFromJNI(JNIEnv *env, jobject thiz) {
+Java_kso_android_ndktestapp_MainActivity_getEmployeeFromJNI(JNIEnv *env, jobject thiz) {
     std::string name = "Kyaw San Oo";
 
-    jclass employee_class = env->FindClass( "kso/android/ndkapp/Employee");
+    jclass employee_class = env->FindClass( "kso/android/ndktestapp/Employee");
     jmethodID employee_constructor = env->GetMethodID( employee_class,  "<init>", "()V" );
     jobject employee_object = env->NewObject(employee_class, employee_constructor );
 

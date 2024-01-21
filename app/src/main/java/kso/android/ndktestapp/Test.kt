@@ -1,4 +1,4 @@
-package kso.android.ndkapp
+package kso.android.ndktestapp
 
 class Test {
     companion object {

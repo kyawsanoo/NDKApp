@@ -1,8 +1,8 @@
-package kso.android.ndkapp
+package kso.android.ndktestapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kso.android.ndkapp.databinding.ActivityMainBinding
+import kso.android.ndktestapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
         // Example of calls to a native method
         val test = Test()
-        binding.sampleText1.text = greetingFromJNI().plus(", ").plus(test.greetingFromJNI())
+        binding.sampleText1.text = greetingFromJNI()/*.plus(", ").plus(test.greetingFromJNI())*/
 
         binding.sampleText2.text = "1+2= ${add(1, 2)}"
 
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         // Used to load the 'ndkapp' library on application startup.
         init {
-            System.loadLibrary("ndkapp")
+            System.loadLibrary("ndk-test-lib")
         }
     }
 }

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'kso.android.ndkapp'
+    namespace 'kso.android.ndktestapp'
     compileSdk 34
     //ndkVersion '25.2.9519653'
 
