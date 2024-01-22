@@ -95,7 +95,7 @@ Java_kso_android_ndktestapp_MainActivity_addSavedArray(JNIEnv *env, jobject thiz
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_kso_android_ndktestapp_Test_greetingFromJNI(JNIEnv *env, jobject thiz) {
-    std::string name = "Hello From Jni.";
+    std::string name = "Hello From JNI.";
     return env->NewStringUTF(name.c_str());
 }
 
@@ -115,3 +115,19 @@ Java_kso_android_ndktestapp_MainActivity_getEmployeeFromJNI(JNIEnv *env, jobject
     return employee_object;
 }
 
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_kso_android_ndktestapp_MainActivity_getInfo(JNIEnv *env, jobject thiz) {
+   const jclass mainActivityClz =  env ->GetObjectClass(thiz);
+   const jmethodID jmethodId = env->GetMethodID(mainActivityClz, "getMessage", ("()Ljava/lang/String;"));
+   if(jmethodId == nullptr){
+       return env->NewStringUTF("");
+   }
+   const jobject result = env->CallObjectMethod(thiz, jmethodId);
+   const std::string java_msg = env->GetStringUTFChars((jstring) result, JNI_FALSE);
+   const std::string jni_msg = " JNI";
+   const std::string message = java_msg + jni_msg;
+   return env->NewStringUTF(message.c_str());
+
+}

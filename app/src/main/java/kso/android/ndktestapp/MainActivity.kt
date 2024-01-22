@@ -1,6 +1,7 @@
 package kso.android.ndktestapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kso.android.ndktestapp.databinding.ActivityMainBinding
 
@@ -29,7 +30,18 @@ class MainActivity : AppCompatActivity() {
         binding.sampleText5.text = "addSavedArray = ${addSavedArray()}"
 
         val employee = getEmployeeFromJNI()
-        binding.sampleText6.text = "employee name:  ${employee?.name}"
+        binding.sampleText6.text = "employee name =  ${employee?.name}"
+
+        val message = getInfo();
+        binding.sampleText7.text = "Info = $message "
+    }
+
+    fun getMessage(): String{ //fun call by JNI
+        showLog()
+        return "Kotlin"
+    }
+    private fun showLog(){
+        Log.e("MainActivity", "Calling kotlin function from JNI");
     }
 
     /**
@@ -51,7 +63,9 @@ class MainActivity : AppCompatActivity() {
 
     private external fun addSavedArray(): Int
 
-    external fun getEmployeeFromJNI(): Employee?
+    private external fun getEmployeeFromJNI(): Employee?
+
+    private external fun getInfo(): String
 
     companion object {
         // Used to load the 'ndkapp' library on application startup.
